@@ -1,0 +1,118 @@
+
+<!doctype html>
+<html>
+<head>
+<title>Ravishing Contact Form Flat Responsive widget Template :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Ravishing Contact Form Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- fonts -->
+<link href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+<!-- /fonts -->
+<!-- css -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/static/css/style.css" rel="stylesheet" type='text/css' media="all" />
+<!-- /css -->
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+
+
+</head>
+<body>
+<a href="/shengCheng/" class="btn  btn-lg" style="color:skyblue" role="button">
+      &lt;&nbsp;&lt;&nbsp;去生成二维码</a>
+<h1 class="w3layouts">解析二维码</h1>
+<div class="content-w3ls">
+	<div class="content1-agile">
+		<div class="info-w3l">
+			<h2 class="wthree"></h2>
+			<p class="agileinfo">Qr</p>
+
+
+
+
+<div class="div1">
+                   <div class="div2" >选择图片</div>
+<form method="post" id="uploadForm" enctype="multipart/form-data">
+                 <input name="file" type="file" class="inputstyle" id="file">
+
+ </form>
+
+
+</div>
+			 <br>
+            <br>
+            <br>
+
+            <div>
+                <label>解析结果:</label>
+                <br>
+                <br>
+               		<textarea id="age" name="message" readonly></textarea>
+
+            </div>
+
+
+
+		</div>
+	</div>
+	<div class="content2-agile">
+
+	<img id="images" src="" style="width:100%;height:100%; color:white" alt=".">
+
+	</div>
+	<div class="clear"></div>
+</div>
+<p class="copyright-agileits"></p>
+
+<script type="text/javascript" >
+$(".content2-agile").hide();
+$("#btn").hide();
+
+$("#file").change(function(){
+$("#age").val("")
+$(".content2-agile").show();
+doUpload()
+});
+
+function doUpload() {
+     var formData = new FormData($( "#uploadForm" )[0]);
+     $.ajax({
+          url: '/getImage/' ,
+          type: 'POST',
+          data: formData,
+          async: false,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (returndata) {
+          	obj = JSON.parse(returndata)
+
+             console.log(obj)
+             console.log(obj.key_one)
+             console.log(obj.key_one[0]["code"])
+             if(obj.key_one[0]["code"]!=1)
+             {
+
+
+             $('#images').attr("src",obj.key_one[1]["images"])
+
+             $(".content2-agile").show();
+             $("#age").val(obj.key_one[2]["strr"])
+             }
+             else{
+             $("#age").val(obj.key_one[2]["strr"])
+             }
+
+
+          },
+          error: function (returndata) {
+              alert("错误");
+          }
+     });
+}
+</script>
+</body>
+</html>
